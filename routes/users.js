@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 const User = require('../models/user');
-//const Message = require('../models/messages');
+const Post = require('../models/post');
 const passport = require('passport');
 
 //Register
@@ -63,6 +63,25 @@ router.post('/authenticate', (req, res, next) => {
 router.get("/profile", passport.authenticate('jwt', {session:false}), (req, res, next)=>{
     res.json({user: req.user});
 });
+
+//send new post to mongoDB
+router.post('/sendNewPost', function(req, res, next) {
+    console.log(req.body)
+
+    Post.create(
+      {
+        owner: req.body.user,
+        topic: req.body.topic,
+        content: req.body.content,
+        comments: [],
+        votes: 0,
+        date: Date.now(),
+      },
+      (err, ok) => {
+        if(err) throw err;
+      }
+    );
+  });
 
 // Messages
 /*router.get("/messages",passport.authenticate('jwt', {session:false}), (req, res, next)=>{

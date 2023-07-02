@@ -8,6 +8,7 @@ export class AuthService {
   authToken: any;
   user: any;
   message: any;
+  openform= false;
 
   constructor(private http: Http) { }
 
@@ -55,4 +56,6 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
+
+
 }
