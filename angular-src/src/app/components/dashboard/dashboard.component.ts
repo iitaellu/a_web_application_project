@@ -7,23 +7,30 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  providers: [PostService]
 })
 export class DashboardComponent implements OnInit {
   topic: String;
   content: String;
   user: any;
+  posts: any [];
 
   constructor(private authService: AuthService,
     private flashMessage: FlashMessagesService,
     private postService: PostService) { }
 
   ngOnInit() {
-    this.topic = "";
-    this.content = "";
-    
+
+    this.getPost();
   }
 
+  getPost(){
+    this.postService.getPost().subscribe(result => {
+      this.posts = result['posts'];
+      console.log(result['posts'])
+    });
+  }
 
   //Send new post to backend
   sendPost(){

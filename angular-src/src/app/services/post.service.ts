@@ -10,6 +10,12 @@ export class PostService {
 
   constructor(private http: Http) { }
 
+// Help from https://code.tutsplus.com/creating-a-blogging-app-using-angular-mongodb-show-post--cms-30140t
+  getPost(){
+    return this.http.get('http://localhost:3000/users/getAllPost', {})
+    .map(function (res) { return res.json(); });
+}
+
   //Send new post to backend server
   sendPost(post){
     let headers = new Headers();

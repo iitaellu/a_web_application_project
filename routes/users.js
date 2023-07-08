@@ -83,6 +83,28 @@ router.post('/sendNewPost', function(req, res, next) {
     );
   });
 
+  router.get('/getAllPost', (req,res) => {
+    Post.find({},(err,data) => {
+        if(err) throw err;
+        
+        else{
+            console.log(data)
+            return res.json({posts: data});
+        }
+    })
+  })
+
+  router.get('/showAllPost', (req, res) => {
+    Post.find({}, [], {sort: {_id:-1}}), (err, doc) => {
+        if(err) throw err;
+        console.log(doc);
+        return res.json({
+            status: 'success', 
+            data: doc
+        })
+    }
+  });
+
 // Messages
 /*router.get("/messages",passport.authenticate('jwt', {session:false}), (req, res, next)=>{
     Message.find({ $or: [{sender: req.user.username},{recipient: req.user.username}]}, (err, data)=> {
