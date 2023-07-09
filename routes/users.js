@@ -80,14 +80,14 @@ router.post('/sendNewPost', function(req, res, next) {
       (err, ok) => {
         if(err) throw err;
       }
-    );
+     
+    ); return res.json({success: true})
   });
 
   // Help from https://code.tutsplus.com/creating-a-blogging-app-using-angular-mongodb-show-post--cms-30140t
   router.get('/getAllPost', (req,res) => {
     Post.find({},(err,data) => {
         if(err) throw err;
-        
         else{
             return res.json({posts: data});
         }

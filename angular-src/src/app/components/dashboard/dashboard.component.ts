@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
           this.flashMessage.show('Message sent',{cssClass: 'alert-success', timeout: 3000});
           this.topic = "";
           this.content = "";
+          location.reload();
         }
         else {
           this.flashMessage.show(data.msg,{cssClass: 'alert-danger', timeout: 3000});

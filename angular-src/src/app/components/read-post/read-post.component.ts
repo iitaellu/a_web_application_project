@@ -54,6 +54,7 @@ export class ReadPostComponent implements OnInit {
           
           this.flashMessage.show('Comment sent',{cssClass: 'alert-success', timeout: 3000});
           this.content = "";
+          location.reload();
         }
         else {
           this.flashMessage.show(data.msg,{cssClass: 'alert-danger', timeout: 3000});
