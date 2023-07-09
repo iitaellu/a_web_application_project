@@ -11,10 +11,10 @@
   <small>Likes {{data?.votes}}</small>
 </div>
 <!--*ngFor="let commet of comments"-->
-<div class="list-group p-3">
-  <li *ngFor="let comment of data?.comments" class="list-group-item list-group-item-action flex-column align-items-start">
+<div class="list-group p-3 ">
+  <li style="background-color:gray" *ngFor="let comment of data?.comments" class="list-group-item list-group-item-action flex-column align-items-start text-white">
       <div >
-          <div class="d-flex w-100 justify-content-between"  >
+          <div style="background-color:rgb(72, 72, 72)" class="d-flex p-2 w-100 justify-content-between"  >
           <small>{{comment[0]}}</small>
           <small>{{comment[3]}}</small>
           </div>
