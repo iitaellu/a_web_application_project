@@ -66,14 +66,14 @@ router.get("/profile", passport.authenticate('jwt', {session:false}), (req, res,
 
 //send new post to mongoDB
 router.post('/sendNewPost', function(req, res, next) {
-    console.log(req.body)
 
     Post.create(
       {
-        owner: req.body.user,
+        owner: req.body.owner.username,
         topic: req.body.topic,
         content: req.body.content,
         comments: [],
+        commentsNUM: 0,
         votes: 0,
         date: Date.now(),
       },
@@ -83,27 +83,47 @@ router.post('/sendNewPost', function(req, res, next) {
     );
   });
 
+  // Help from https://code.tutsplus.com/creating-a-blogging-app-using-angular-mongodb-show-post--cms-30140t
   router.get('/getAllPost', (req,res) => {
     Post.find({},(err,data) => {
         if(err) throw err;
         
         else{
-            console.log(data)
             return res.json({posts: data});
         }
     })
   })
 
-  router.get('/showAllPost', (req, res) => {
-    Post.find({}, [], {sort: {_id:-1}}), (err, doc) => {
+  router.get('/getPostData/:id', (req, res) => {
+    Post.findById((req.params.id), (err, post) => {
         if(err) throw err;
-        console.log(doc);
-        return res.json({
-            status: 'success', 
-            data: doc
-        })
-    }
-  });
+        else{
+            return res.json({data: post})
+        }
+    });
+})
+
+router.post('/sendComment', (req, res) => {
+    Post.findById(req.body.postid, (err, post) => {
+        if(err) throw err;
+        else{
+            let comments = post.comments;
+            //console.log(comments)
+            let comment = [];
+
+            newComment = [req.body.owner.username, req.body.content,0, Date.now()]
+            comments.push(newComment)
+              Post.findByIdAndUpdate(req.body.postid, {$set:{comments:comments}}, (err, doc) => {
+                if(err) throw err;
+                return res.json({success: true})
+              })
+            //console.log(comments)
+        }
+    })
+   //return res.json({msg: "error with sending comment"})
+})
+
+
 
 // Messages
 /*router.get("/messages",passport.authenticate('jwt', {session:false}), (req, res, next)=>{

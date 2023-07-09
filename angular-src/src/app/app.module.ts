@@ -18,6 +18,7 @@ import {FlashMessagesModule} from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 
 import {PostService} from './services/post.service';
+import { ReadPostComponent } from './components/read-post/read-post.component';
 //import { ReadComponent } from './components/read/read.component';
 
 const appRoutes: Routes = [
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent},
   {path:'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path:'read-post/:id', component: ReadPostComponent},
 ]
 
 @NgModule({
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    ReadPostComponent
   ],
   imports: [
     BrowserModule,

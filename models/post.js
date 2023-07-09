@@ -15,6 +15,7 @@ let postSchema = new Schema({
         required: true
     },
     comments: [],
+    commentsNUM: Number,
     votes: Number,
     date: Date
 })
