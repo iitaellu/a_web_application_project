@@ -8,7 +8,9 @@
 </div>
   <p class="mb-1">{{data?.content}}</p>
   <small>Likes {{data?.votes}}</small>
-  <i style="float:right; margin-top:15px; margin-bottom:15px; font-size: 25px; color: red;" class="fa fa-heart"></i>
+  <button style="float:right; margin-top:15px;" (click)="likePost(data?._id)">
+    <i style="font-size: 25px; color: red;" class="fa fa-heart"></i>
+  </button>
 
 </div>
 <!--*ngFor="let commet of comments"-->
@@ -22,7 +24,9 @@
           <p class="mb-1">{{comment[1]}}</p>
           <br>
           <small>Likes {{comment[2]}}</small>
-          <i style="float:right; margin-top:15px; font-size: 25px; color: red;" class="fa fa-heart"></i>
+          <button style="float:right; margin-top:15px;">
+            <i style="font-size: 25px; color: red;" class="fa fa-heart"></i>
+          </button>
       </div>
       
   </li>

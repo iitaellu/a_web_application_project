@@ -125,71 +125,20 @@ router.post('/sendComment', (req, res) => {
    //return res.json({msg: "error with sending comment"})
 })
 
-
-
-// Messages
-/*router.get("/messages",passport.authenticate('jwt', {session:false}), (req, res, next)=>{
-    Message.find({ $or: [{sender: req.user.username},{recipient: req.user.username}]}, (err, data)=> {
-        if (err) throw err;
+router.post('/likePost', (req,res) => {
+    Post.findById(req.body.postid, (err, post) => {
+        if(err) throw err;
         else{
-            let msg = []
-            for (let i = 0; i < data.length; i++){
-                msg.push(data[i]);
-            }
-            return res.json({message: msg});
-        }
-    })
-});
+            console.log(post)
+            let likes = post.votes + 1;
 
-//SEND NEW MESSAGE
-router.post('/sendNewMessage', (req, res, next) => {
-
-    User.getUserByUsername(req.body.username, (err, user) => {
-        if(err) throw err;
-        if(!user) {
-            return res.json({success: false, msg: 'No user with username '+ req.body.username});
-            }
-        if(user.username == req.body.sender.username){
-            return res.json({success: false, msg: "Can't send letter to yourself "+ req.body.username});
-        }
-        let newMessage = new Message ({
-            sender: req.body.sender.username,
-            recipient: req.body.username,
-            topic: req.body.topic,
-            message: req.body.msg
-        })
-
-        newMessage.save();
-        return res.json({success: true});
-        }
-    )     
-
-    
-})
-
-//Send messsage in old message
-router.post('/sendMessage', (req, res, next) => {
-
-    const id = req.body.messageID;
-    Message.findById(id, (err, message) => {
-        if(err) throw err;
-        if(message){
-            msg = message.msg;
-
-            newMsg= [msg.length, req.body.sender, req.body.message, false]
-            msg.push(newMsg)
-            //msg.add(req.body.message)
-            //FROM https://www.youtube.com/watch?v=qrDlIiq9zAc
-            Message.findByIdAndUpdate(req.body.messageID, {$set:{ msg: msg}}, (err, doc)=> {
+            Post.findByIdAndUpdate(req.body.postid, {$set:{votes: likes}}, (err, doc) => {
                 if(err) throw err;
-                res.json(doc)
-            })
-        }
-        else{
-            return res.json({success: false, msg: 'messages not found'});
+                return res.json({success: true})
+              })
+
         }
     })
-})*/
-
+})
 
 module.exports = router;
