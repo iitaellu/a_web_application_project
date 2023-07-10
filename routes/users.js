@@ -75,7 +75,7 @@ router.post('/sendNewPost', function(req, res, next) {
         comments: [],
         commentsNUM: 0,
         votes: 0,
-        date: Date.now(),
+        date: Date.now()
       },
       (err, ok) => {
         if(err) throw err;
@@ -109,11 +109,11 @@ router.post('/sendComment', (req, res) => {
         else{
             let comments = post.comments;
             //console.log(comments)
-            let comment = [];
+            console.log(comments.length)
 
             newComment = [req.body.owner.username, req.body.content,0, Date.now()]
             comments.push(newComment)
-              Post.findByIdAndUpdate(req.body.postid, {$set:{comments:comments}}, (err, doc) => {
+              Post.findByIdAndUpdate(req.body.postid, {$set:{comments:comments, commentsNUM:comments.length}}, (err, doc) => {
                 if(err) throw err;
                 return res.json({success: true})
               })
