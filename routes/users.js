@@ -6,6 +6,7 @@ const config = require('../config/database');
 const User = require('../models/user');
 const Post = require('../models/post');
 const passport = require('passport');
+const moment = require('moment');
 
 //Register
 router.post("/register", (req, res, next)=>{
@@ -67,6 +68,7 @@ router.get("/profile", passport.authenticate('jwt', {session:false}), (req, res,
 //send new post to mongoDB
 router.post('/sendNewPost', function(req, res, next) {
 
+    let date = moment().format('DD/MM/YYYY HH:mm')
     Post.create(
       {
         owner: req.body.owner.username,
@@ -75,7 +77,7 @@ router.post('/sendNewPost', function(req, res, next) {
         comments: [],
         commentsNUM: 0,
         votes: 0,
-        date: Date.now()
+        date: date
       },
       (err, ok) => {
         if(err) throw err;
@@ -109,9 +111,9 @@ router.post('/sendComment', (req, res) => {
         else{
             let comments = post.comments;
             //console.log(comments)
-            console.log(comments.length)
+            let date = moment().format('DD/MM/YYYY HH:mm')
 
-            newComment = [req.body.owner.username, req.body.content,0, Date.now()]
+            newComment = [req.body.owner.username, req.body.content,0, date]
             comments.push(newComment)
               Post.findByIdAndUpdate(req.body.postid, {$set:{comments:comments, commentsNUM:comments.length}}, (err, doc) => {
                 if(err) throw err;

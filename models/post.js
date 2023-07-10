@@ -17,7 +17,7 @@ let postSchema = new Schema({
     comments: [],
     commentsNUM: Number,
     votes: Number,
-    date: Date
+    date: String
 })
 
 module.exports = mongoose.model("Post", postSchema)

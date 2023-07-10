@@ -1,6 +1,6 @@
 
 <div class="p-3 border-bottom">
-  <div class="d-flex p-2 justify-content-between bg-dark text-white"  >
+  <div class=" d-flex p-2 justify-content-between bg-dark text-white"  >
   
   <h3 class="mb-1">{{data?.topic}}</h3>
   <h5>{{data?.owner}}</h5>
@@ -8,6 +8,8 @@
 </div>
   <p class="mb-1">{{data?.content}}</p>
   <small>Likes {{data?.votes}}</small>
+  <i style="float:right; margin-top:15px; margin-bottom:15px; font-size: 25px; color: red;" class="fa fa-heart"></i>
+
 </div>
 <!--*ngFor="let commet of comments"-->
 <div class="list-group p-3 ">
@@ -20,7 +22,9 @@
           <p class="mb-1">{{comment[1]}}</p>
           <br>
           <small>Likes {{comment[2]}}</small>
+          <i style="float:right; margin-top:15px; font-size: 25px; color: red;" class="fa fa-heart"></i>
       </div>
+      
   </li>
 </div>
 
