@@ -76,6 +76,7 @@ router.post('/sendNewPost', function(req, res, next) {
         content: req.body.content,
         comments: [],
         commentsNUM: 0,
+        liked: [],
         votes: 0,
         date: date
       },
@@ -129,13 +130,35 @@ router.post('/likePost', (req,res) => {
     Post.findById(req.body.postid, (err, post) => {
         if(err) throw err;
         else{
-            console.log(post)
-            let likes = post.votes + 1;
+            let exisist = 0;
+            let liked = post.liked;
+            let likedwithout= [];
 
-            Post.findByIdAndUpdate(req.body.postid, {$set:{votes: likes}}, (err, doc) => {
-                if(err) throw err;
-                return res.json({success: true})
-              })
+            for (let i = 0; i < liked.length; i++){
+                console.log(liked[i])
+                if (liked[i] == req.body.name._id){
+                    exisist = 1;
+                }
+                else {
+                    likedwithout.push(liked[i]);
+                }
+            }
+
+            let likes, msg;
+            if (exisist == 0){
+                likedwithout.push(req.body.name._id)
+                likes = post.votes + 1;
+                msg = "Liked"
+            }
+
+            if (exisist == 1){
+                likes = post.votes -1;
+                msg = "Unliked"
+            }
+            Post.findByIdAndUpdate(req.body.postid, {$set:{liked: likedwithout, votes: likes}}, (err, doc) => {
+                    if(err) throw err;
+                    return res.json({success: true, msg: msg})
+                })            
 
         }
     })

@@ -65,10 +65,19 @@ export class ReadPostComponent implements OnInit {
   }
 
   likePost(id){
-    console.log(id)
-    const msg = {postid: id}
-    this.postService.likePost(msg).subscribe(result => {
+
+    this.authService.getProfile().subscribe(user_data => {
+      this.user = user_data.user
+      console.log(this.user)
+
+      const likeData={
+        postid: id,
+        name: this.user,
+      }
+    
+    this.postService.likePost(likeData).subscribe(result => {
       location.reload(); });
+    })
   }
 }
 

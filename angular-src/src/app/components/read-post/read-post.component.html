@@ -8,7 +8,7 @@
 </div>
   <p class="mb-1">{{data?.content}}</p>
   <small>Likes {{data?.votes}}</small>
-  <button style="float:right; margin-top:15px;" (click)="likePost(data?._id)">
+  <button *ngIf="authService.loggedIn()" style="float:right; margin-top:15px;" (click)="likePost(data?._id)">
     <i style="font-size: 25px; color: red;" class="fa fa-heart"></i>
   </button>
 
