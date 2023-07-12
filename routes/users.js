@@ -10,11 +10,13 @@ const moment = require('moment');
 
 //Register
 router.post("/register", (req, res, next)=>{
+    let date = moment().format('DD/MM/YYYY HH:mm')
     let newUser = new User({
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        registerDate: date
     });
 
     User.addUser(newUser, (err, user) => {
@@ -165,40 +167,47 @@ router.post('/likePost', (req,res) => {
 })
 
 router.post('/likeComment', (req,res) => {
+    console.log(req.body)
+    //Find current post
     Post.findById(req.body.postid, (err, post) => {
         if(err) throw err;
         else{
             let comments = post.comments;
             let current = comments[req.body.comment[0]];
 
-            likesOfCommet = current[3];
+            let likesOfCommet = current[3];
 
             let exisist = 0;
             let updatedLikesOfComment= [];
 
+            //checking if user is already liked comment
              for (let i = 0; i < likesOfCommet.length; i++){
                 if (likesOfCommet[i] == req.body.user.username){
                     exisist = 1;
                 }
                 else {
-                    updatedLikesOfCommet.push(likesOfCommet[i]);
+                    updatedLikesOfComment.push(likesOfCommet[i]);
                 }
             }
 
+            // if not liked, user will be added to liked list and number will rise
             if (exisist == 0){
                 updatedLikesOfComment.push(req.body.user.username)
-                current[4] = updatedLikesOfComment.length ;
+                current[4] = updatedLikesOfComment.length;
                 msg = "Liked comment"
             }
+            //if already liked user will be deleted from liked list and likes down grades 
             if (exisist == 1){
-                current[4] = updatedLikesOfComment.length ;
+                current[4] = updatedLikesOfComment.length;
                 msg = "Unliked comment"
             }
             
+            //save to right plase in all comments list of post
             current[3] = updatedLikesOfComment;
             comments[req.body.comment[0]]= current;
             console.log(comments)
             
+            //update post
             Post.findByIdAndUpdate(req.body.postid, {$set:{comments: comments}}, (err, doc) => {
                     if(err) throw err;
                     return res.json({success: true, msg: msg})
@@ -208,4 +217,15 @@ router.post('/likeComment', (req,res) => {
     })
 })
 
+router.get('/profile/:username', (req, res) => {
+    console.log(req.params.username)
+    User.findOne({username: req.params.username}, (err, user) => {
+        if(err) throw err;
+        else{
+            console.log(user)
+            return res.json({data: user})
+    }
+    
+});
+})
 module.exports = router;

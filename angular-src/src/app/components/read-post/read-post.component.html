@@ -3,7 +3,7 @@
   <div class=" d-flex p-2 justify-content-between bg-dark text-white"  >
   
   <h3 class="mb-1">{{data?.topic}}</h3>
-  <h5>{{data?.owner}}</h5>
+  <h5 routerLink="/profile/{{data?.owner}}">{{data?.owner}}</h5>
   <small>{{data?.date}}</small> 
 </div>
   <p class="mb-1">{{data?.content}}</p>
@@ -16,7 +16,7 @@
   <li style="background-color:gray" *ngFor="let comment of data?.comments" class="list-group-item list-group-item-action flex-column align-items-start text-white">
       <div >
           <div style="background-color:rgb(72, 72, 72)" class="d-flex p-2 w-100 justify-content-between"  >
-          <small>{{comment[1]}}</small>
+          <small routerLink="/profile/{{comment[1]}}">{{comment[1]}}</small>
           <small>{{comment[5]}}</small>
           </div>
           <p class="mb-2">{{comment[2]}}</p>

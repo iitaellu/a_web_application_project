@@ -58,4 +58,9 @@ export class PostService {
     return this.http.post('http://localhost:3000/users/likeComment', msg)
     .map(function (res) { return res.json(); });
   }
+
+  getUserData(username){
+    return this.http.get('http://localhost:3000/users/profile/'+username, {})
+    .map(function (res) { return res.json(); });
+  }
 }

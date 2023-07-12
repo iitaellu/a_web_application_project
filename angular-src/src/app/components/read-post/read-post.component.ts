@@ -83,7 +83,7 @@ export class ReadPostComponent implements OnInit {
   likeComment(commentData){
     this.authService.getProfile().subscribe(user_data => {
       this.user = user_data.user
-      console.log(this.user)
+      console.log(commentData)
 
       const likeData={
         postid: this.postid,

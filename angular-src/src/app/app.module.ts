@@ -19,6 +19,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 import {PostService} from './services/post.service';
 import { ReadPostComponent } from './components/read-post/read-post.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 //import { ReadComponent } from './components/read/read.component';
 
 const appRoutes: Routes = [
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
   {path:'dashboard', component: DashboardComponent},
   {path:'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path:'read-post/:id', component: ReadPostComponent},
+  {path:'profile/:username', component: UserProfileComponent},
 ]
 
 @NgModule({
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
-    ReadPostComponent
+    ReadPostComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

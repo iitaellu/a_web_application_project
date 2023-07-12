@@ -19,6 +19,9 @@ let UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    registerDate: {
+        type: String
     }
 });
 
