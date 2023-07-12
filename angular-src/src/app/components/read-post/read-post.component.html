@@ -7,26 +7,23 @@
   <small>{{data?.date}}</small> 
 </div>
   <p class="mb-1">{{data?.content}}</p>
+  <i *ngIf="authService.loggedIn()" style="float:right; margin-top:15px; font-size: 25px; color: rgb(197, 34, 34);" class="fa fa-heart" (click)="likePost(data?._id)"></i>
+  <br>
   <small>Likes {{data?.votes}}</small>
-  <button *ngIf="authService.loggedIn()" style="float:right; margin-top:15px;" (click)="likePost(data?._id)">
-    <i style="font-size: 25px; color: red;" class="fa fa-heart"></i>
-  </button>
-
 </div>
 <!--*ngFor="let commet of comments"-->
 <div class="list-group p-3 ">
   <li style="background-color:gray" *ngFor="let comment of data?.comments" class="list-group-item list-group-item-action flex-column align-items-start text-white">
       <div >
           <div style="background-color:rgb(72, 72, 72)" class="d-flex p-2 w-100 justify-content-between"  >
-          <small>{{comment[0]}}</small>
-          <small>{{comment[3]}}</small>
+          <small>{{comment[1]}}</small>
+          <small>{{comment[5]}}</small>
           </div>
-          <p class="mb-1">{{comment[1]}}</p>
+          <p class="mb-2">{{comment[2]}}</p>
+
+          <i *ngIf="authService.loggedIn()" style="float:right; margin-top:15px; font-size: 25px; color: rgb(197, 34, 34);" class="fa fa-heart" (click)="likeComment(comment)"></i>
           <br>
-          <small>Likes {{comment[2]}}</small>
-          <button style="float:right; margin-top:15px;">
-            <i style="font-size: 25px; color: red;" class="fa fa-heart"></i>
-          </button>
+          <small>Likes {{comment[4]}}</small>
       </div>
       
   </li>

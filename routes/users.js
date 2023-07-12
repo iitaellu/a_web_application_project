@@ -113,8 +113,8 @@ router.post('/sendComment', (req, res) => {
             let comments = post.comments;
             //console.log(comments)
             let date = moment().format('DD/MM/YYYY HH:mm')
-
-            newComment = [req.body.owner.username, req.body.content,0, date]
+            let id = comments.length;
+            newComment = [id ,req.body.owner.username, req.body.content, [] , 0, date]
             comments.push(newComment)
               Post.findByIdAndUpdate(req.body.postid, {$set:{comments:comments, commentsNUM:comments.length}}, (err, doc) => {
                 if(err) throw err;
@@ -136,7 +136,7 @@ router.post('/likePost', (req,res) => {
 
             for (let i = 0; i < liked.length; i++){
                 console.log(liked[i])
-                if (liked[i] == req.body.name._id){
+                if (liked[i] == req.body.user._id){
                     exisist = 1;
                 }
                 else {
@@ -146,7 +146,7 @@ router.post('/likePost', (req,res) => {
 
             let likes, msg;
             if (exisist == 0){
-                likedwithout.push(req.body.name._id)
+                likedwithout.push(req.body.user._id)
                 likes = post.votes + 1;
                 msg = "Liked"
             }
@@ -159,6 +159,50 @@ router.post('/likePost', (req,res) => {
                     if(err) throw err;
                     return res.json({success: true, msg: msg})
                 })            
+
+        }
+    })
+})
+
+router.post('/likeComment', (req,res) => {
+    Post.findById(req.body.postid, (err, post) => {
+        if(err) throw err;
+        else{
+            let comments = post.comments;
+            let current = comments[req.body.comment[0]];
+
+            likesOfCommet = current[3];
+
+            let exisist = 0;
+            let updatedLikesOfComment= [];
+
+             for (let i = 0; i < likesOfCommet.length; i++){
+                if (likesOfCommet[i] == req.body.user.username){
+                    exisist = 1;
+                }
+                else {
+                    updatedLikesOfCommet.push(likesOfCommet[i]);
+                }
+            }
+
+            if (exisist == 0){
+                updatedLikesOfComment.push(req.body.user.username)
+                current[4] = updatedLikesOfComment.length ;
+                msg = "Liked comment"
+            }
+            if (exisist == 1){
+                current[4] = updatedLikesOfComment.length ;
+                msg = "Unliked comment"
+            }
+            
+            current[3] = updatedLikesOfComment;
+            comments[req.body.comment[0]]= current;
+            console.log(comments)
+            
+            Post.findByIdAndUpdate(req.body.postid, {$set:{comments: comments}}, (err, doc) => {
+                    if(err) throw err;
+                    return res.json({success: true, msg: msg})
+                })       
 
         }
     })

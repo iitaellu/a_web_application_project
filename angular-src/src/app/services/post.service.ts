@@ -54,4 +54,8 @@ export class PostService {
     .map(function (res) { return res.json(); });
   }
 
+  likeComment(msg){
+    return this.http.post('http://localhost:3000/users/likeComment', msg)
+    .map(function (res) { return res.json(); });
+  }
 }
