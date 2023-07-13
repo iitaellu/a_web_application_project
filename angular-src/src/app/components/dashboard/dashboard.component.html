@@ -22,14 +22,40 @@
       <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
           <button type="reset" class="btn btn-default">Cancel</button>
-          <button type="submit" class="btn btn-primary" value="Send">Submit</button>
+          <button type="submit" class="btn btn-primary" value="Send">Search</button>
         </div>
       </div>
     </fieldset>
   </form>
 </div>
 
-<div class="list-group jumbotron">
+<div class="d-flex p-2 w-100 justify-content-center" style="width:800px; margin:0 auto;">
+  <form  class="d-flex p-2 w-100 justify-content-center" role="search" (submit)="searchPost(searchTopic)">
+    <input type="text" class="form-control col-lg-10 col-lg-offset-2" placeholder="Search by topic" [(ngModel)]="searchTopic" name="searchTopic">  
+    <button type="submit" class="btn btn-primary" style="float:center;" (click)="opensearchform = !opensearchform">Submit</button>
+  </form>
+</div >
+
+<div class="list-group" [hidden]="!opensearchform">
+  <label >Results</label>
+  <li *ngFor="let search of result" routerLink="/read-post/{{search._id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+      
+      <div id="{{search._id}}">
+          <div class="d-flex w-100 justify-content-between"  >
+          <h5 class="mb-1">{{search.topic}}</h5>
+          <small>{{search.owner}}</small>
+          <small>{{search.date}}</small>
+          </div>
+          <p class="mb-1">{{search.content}}</p>
+          <br>
+          <small> Comments {{search.commentsNUM}}</small>
+          <small>Likes {{search.votes}}</small>
+      </div>
+      
+  </li>
+</div>
+
+<div class="list-group jumbotron" [hidden]="opensearchform">
     <li *ngFor="let post of posts" routerLink="/read-post/{{post._id}}" class="list-group-item list-group-item-action flex-column align-items-start">
         <div id="{{post._id}}">
             <div class="d-flex w-100 justify-content-between"  >

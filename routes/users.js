@@ -16,7 +16,8 @@ router.post("/register", (req, res, next)=>{
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        registerDate: date
+        registerDate: date,
+        bio: ""
     });
 
     User.addUser(newUser, (err, user) => {
@@ -137,7 +138,6 @@ router.post('/likePost', (req,res) => {
             let likedwithout= [];
 
             for (let i = 0; i < liked.length; i++){
-                console.log(liked[i])
                 if (liked[i] == req.body.user._id){
                     exisist = 1;
                 }
@@ -167,7 +167,6 @@ router.post('/likePost', (req,res) => {
 })
 
 router.post('/likeComment', (req,res) => {
-    console.log(req.body)
     //Find current post
     Post.findById(req.body.postid, (err, post) => {
         if(err) throw err;
@@ -224,8 +223,19 @@ router.get('/profile/:username', (req, res) => {
         else{
             console.log(user)
             return res.json({data: user})
-    }
-    
-});
+        }    
+    });
+
 })
+
+router.post('/search', (req, res) => {
+    console.log(req.body)
+    Post.find({topic: {'$regex': (req.body.topic)}}, (err, post) => {
+        if(err) throw err;
+        else{
+            return res.json({success: true, data: post})
+        }
+    })
+})
+
 module.exports = router;

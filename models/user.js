@@ -22,6 +22,9 @@ let UserSchema = new Schema({
     },
     registerDate: {
         type: String
+    },
+    bio:{
+        type: String
     }
 });
 

@@ -63,4 +63,9 @@ export class PostService {
     return this.http.get('http://localhost:3000/users/profile/'+username, {})
     .map(function (res) { return res.json(); });
   }
+
+  searchPost(topic){
+    return this.http.post('http://localhost:3000/users/search', topic)
+    .map(function (res) { return res.json(); });
+  }
 }

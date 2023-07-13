@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   content: String;
   user: any;
   posts: any [];
+  result: any [];
 
   constructor(private authService: AuthService,
     private flashMessage: FlashMessagesService,
@@ -58,4 +59,28 @@ export class DashboardComponent implements OnInit {
       })
     })
   }
+
+  searchPost(stopic){
+    console.log(stopic)
+    if(stopic == undefined){
+      this.flashMessage.show("Type something",{cssClass: 'alert-danger', timeout: 3000});
+    }
+
+    else{
+        const msg = {
+        topic: stopic
+      }
+      console.log(msg)
+      this.postService.searchPost(msg).subscribe(search => {
+        this.result = search['data'];
+        console.log(search)
+        if(search.success){
+          console.log(this.result);
+        }
+      
+      })
+      
+    }
+ }
+    
 }
