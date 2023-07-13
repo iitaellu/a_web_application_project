@@ -22,7 +22,7 @@
       <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
           <button type="reset" class="btn btn-default">Cancel</button>
-          <button type="submit" class="btn btn-primary" value="Send">Search</button>
+          <button type="submit" class="btn btn-primary" value="Send">Submit</button>
         </div>
       </div>
     </fieldset>
@@ -32,7 +32,7 @@
 <div class="d-flex p-2 w-100 justify-content-center" style="width:800px; margin:0 auto;">
   <form  class="d-flex p-2 w-100 justify-content-center" role="search" (submit)="searchPost(searchTopic)">
     <input type="text" class="form-control col-lg-10 col-lg-offset-2" placeholder="Search by topic" [(ngModel)]="searchTopic" name="searchTopic">  
-    <button type="submit" class="btn btn-primary" style="float:center;" (click)="opensearchform = !opensearchform; clearbutton = !clearbutton" [hidden]="clearbutton">Submit</button>
+    <button type="submit" class="btn btn-primary" style="float:center;" (click)="opensearchform = !opensearchform; clearbutton = !clearbutton" [hidden]="clearbutton">Search</button>
     <button type="reset" class="btn btn-default" (click)="opensearchform = !opensearchform; clearbutton = !clearbutton" [hidden]="!clearbutton">Cancel</button>
   </form>
 </div >

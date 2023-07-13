@@ -238,4 +238,14 @@ router.post('/search', (req, res) => {
     })
 })
 
+router.post('/saveBio', (req, res) => {
+    console.log(req.body)
+    User.findByIdAndUpdate(req.body.owner._id, {$set:{bio: req.body.bio}}, (err, user) => {
+        if (err) throw err;
+        else{
+            return res.json({User: user});
+        }
+    })
+})
+
 module.exports = router;

@@ -68,4 +68,9 @@ export class PostService {
     return this.http.post('http://localhost:3000/users/search', topic)
     .map(function (res) { return res.json(); });
   }
+
+  saveBio(bio){
+    return this.http.post('http://localhost:3000/users/saveBio', bio)
+    .map(function (res) { return res.json(); });
+  }
 }
