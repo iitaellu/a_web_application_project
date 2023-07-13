@@ -64,6 +64,7 @@ export class DashboardComponent implements OnInit {
     console.log(stopic)
     if(stopic == undefined){
       this.flashMessage.show("Type something",{cssClass: 'alert-danger', timeout: 3000});
+      this.result = [{topic: "No results"}]
     }
 
     else{
@@ -73,8 +74,11 @@ export class DashboardComponent implements OnInit {
       console.log(msg)
       this.postService.searchPost(msg).subscribe(search => {
         this.result = search['data'];
-        console.log(search)
-        if(search.success){
+        console.log(this.result[0])
+        if(this.result[0] == undefined){
+          this.result = [{topic: "No results"}]
+        }
+        else{
           console.log(this.result);
         }
       

@@ -32,7 +32,8 @@
 <div class="d-flex p-2 w-100 justify-content-center" style="width:800px; margin:0 auto;">
   <form  class="d-flex p-2 w-100 justify-content-center" role="search" (submit)="searchPost(searchTopic)">
     <input type="text" class="form-control col-lg-10 col-lg-offset-2" placeholder="Search by topic" [(ngModel)]="searchTopic" name="searchTopic">  
-    <button type="submit" class="btn btn-primary" style="float:center;" (click)="opensearchform = !opensearchform">Submit</button>
+    <button type="submit" class="btn btn-primary" style="float:center;" (click)="opensearchform = !opensearchform; clearbutton = !clearbutton" [hidden]="clearbutton">Submit</button>
+    <button type="reset" class="btn btn-default" (click)="opensearchform = !opensearchform; clearbutton = !clearbutton" [hidden]="!clearbutton">Cancel</button>
   </form>
 </div >
 
