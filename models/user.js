@@ -25,6 +25,9 @@ let UserSchema = new Schema({
     },
     bio:{
         type: String
+    },
+    bioEditDate:{
+        type: String
     }
 });
 

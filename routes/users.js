@@ -17,8 +17,10 @@ router.post("/register", (req, res, next)=>{
         username: req.body.username,
         password: req.body.password,
         registerDate: date,
-        bio: ""
+        bio: "",
+        bioEditDate: ""
     });
+    console.log(newUser)
 
     User.addUser(newUser, (err, user) => {
         if(err) {
@@ -240,7 +242,9 @@ router.post('/search', (req, res) => {
 
 router.post('/saveBio', (req, res) => {
     console.log(req.body)
-    User.findByIdAndUpdate(req.body.owner._id, {$set:{bio: req.body.bio}}, (err, user) => {
+    let date = moment().format('DD/MM/YYYY HH:mm')
+    
+    User.findByIdAndUpdate(req.body.owner._id, {$set:{bio: req.body.bio, bioEditDate: date}}, (err, user) => {
         if (err) throw err;
         else{
             return res.json({User: user});
