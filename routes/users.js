@@ -20,7 +20,6 @@ router.post("/register", (req, res, next)=>{
         bio: "",
         bioEditDate: "Never"
     });
-    console.log(newUser)
 
     User.addUser(newUser, (err, user) => {
         if(err) {
@@ -117,7 +116,6 @@ router.post('/sendComment', (req, res) => {
         if(err) throw err;
         else{
             let comments = post.comments;
-            //console.log(comments)
             let date = moment().format('DD/MM/YYYY HH:mm')
             let id = comments.length;
             newComment = [id ,req.body.owner.username, req.body.content, [] , 0, date]
@@ -210,7 +208,6 @@ router.post('/likeComment', (req,res) => {
             //save to right plase in all comments list of post
             current[3] = updatedLikesOfComment;
             comments[req.body.comment[0]]= current;
-            console.log(comments)
             
             //update post
             Post.findByIdAndUpdate(req.body.postid, {$set:{comments: comments}}, (err, doc) => {
@@ -224,11 +221,9 @@ router.post('/likeComment', (req,res) => {
 
 //Go to wanted users profile (by username)
 router.get('/profile/:username', (req, res) => {
-    console.log(req.params.username)
     User.findOne({username: req.params.username}, (err, user) => {
         if(err) throw err;
         else{
-            console.log(user)
             return res.json({data: user})
         }    
     });
@@ -237,7 +232,6 @@ router.get('/profile/:username', (req, res) => {
 
 //Search topics with keyword
 router.post('/search', (req, res) => {
-    console.log(req.body)
     Post.find({topic: {'$regex': (req.body.topic)}}, (err, post) => {
         if(err) throw err;
         else{
@@ -248,7 +242,6 @@ router.post('/search', (req, res) => {
 
 //Save edited BIO tu user data
 router.post('/saveBio', (req, res) => {
-    console.log(req.body)
     let date = moment().format('DD/MM/YYYY HH:mm')
     
     User.findByIdAndUpdate(req.body.owner._id, {$set:{bio: req.body.bio, bioEditDate: date}}, (err, user) => {
