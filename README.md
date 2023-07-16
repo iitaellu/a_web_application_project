@@ -1,4 +1,3 @@
-# Stuck Space
 ![image](https://github.com/iitaellu/a_web_application_project/assets/78799868/08817149-0029-40a4-b34f-3e62eb72af34)
 
 ## Discription
