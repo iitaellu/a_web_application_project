@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container">
     <div class="navbar-header">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <button  type="button" class="navbar-toggler" data-toggle="collapse" data-target="#dropDown" aria-controls="dropDown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="/"> Stuck Space </a>
     </div>
-    <div id="navbar" class="collapse navbar-collapse">
+    <div id="dropDown" class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto n"> 
         <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
           <a class="nav-link" [routerLink]="['/dashboard']">Content </a>
@@ -28,6 +28,6 @@
 </nav>
 
 
-
+  
 
 
