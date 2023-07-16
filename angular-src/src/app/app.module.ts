@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import {PostService} from './services/post.service';
 import { ReadPostComponent } from './components/read-post/read-post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { FooterComponent } from './components/footer/footer.component';
 //import { ReadComponent } from './components/read/read.component';
 
 const appRoutes: Routes = [
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     RegisterComponent,
     ReadPostComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
