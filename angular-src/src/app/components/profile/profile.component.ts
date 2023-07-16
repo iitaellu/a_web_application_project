@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
         bio: bio
       }
     this.postService.saveBio(bioData).subscribe(bio=> {
-      //location.reload();
+      location.reload();
     })
   })
 

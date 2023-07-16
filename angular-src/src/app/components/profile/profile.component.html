@@ -1,23 +1,33 @@
 <div *ngIf="user">
-  <h2 class=" "page-header>{{user.name}}</h2>
-  <ul class="list-group">
-    <li class="list-group-item"> Username: {{user.username}}</li>
-    <li class="list-group-item"> email: {{user.email}}</li>
-    <li class="list-group-item"> With us since: {{user.registerDate}}</li>
+  <h2 class="d-flex p-2 w-100 justify-content-center">{{user.name}}</h2>
+  <ul class="list-group" style="font-size: 20px;">
+    <li class="list-group-item" style="font-weight: bold;"> Username: <span style="font-weight: normal;">{{user?.username}}</span></li>
+    <li class="list-group-item" style="font-weight: bold;"> Email: <span style="font-weight: normal;"> {{user?.email}}</span></li>
+    <li class="list-group-item" style="font-weight: bold;"> With us since: <span style="font-weight: normal;" > {{user?.registerDate}}</span> </li>
+    <li class="list-group-item" style="font-weight: bold;"> BIO: <span style="font-weight: normal;">{{user?.bio}} </span></li>
   </ul>
 
-  <form class="form-horizontal"  (submit)="saveBio(bio)">
+<br>
+<br>
+<div class="text-center marging-auto" style="margin: 10px;">
+  <button *ngIf="authService.loggedIn()" class="btn btn-primary" (click)="openBIOform = !openBIOform">Write BIO</button>
+</div>
+<div [hidden]="!openBIOform" class=" p-2" style="font-size: 20px;">
+   <form class="form-horizontal jumbotron bg-dark text-white"  (submit)="saveBio(bio)">
+    
     <div class="form-group">
-      <label for="textArea" class="col-lg-2 control-label">Bio</label>
+      <label for="textArea" class="col-lg-2 control-label">New Bio</label>
       <div class="col-lg-10">
-        <textarea class="form-control" rows="3" id="textArea" [(ngModel)]="bio" name="bio" placeholder="{{user.bio}}"></textarea>
+        <textarea class="form-control" style= "color:black;" rows="3" id="textArea" [(ngModel)]="bio" name="bio" placeholder="{{user.bio}}"></textarea>
         <span class="help-block"></span>
       </div>
     </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
         <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </div>
   </form>
+ 
 </div>

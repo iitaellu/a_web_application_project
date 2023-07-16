@@ -1,9 +1,9 @@
 <div>
-  <h2 class=" "page-header>{{user?.name}}</h2>
-  <ul class="list-group">
-    <li class="list-group-item"> Username: {{user?.username}}</li>
-    <li class="list-group-item"> email: {{user?.email}}</li>
-    <li class="list-group-item"> With us since: {{user?.registerDate}}</li>
-    <li class="list-group-item"> BIO: {{user?.bio}}</li>
+  <h2 class="d-flex p-2 w-100 justify-content-center">{{user?.name}}</h2>
+  <ul class="list-group" style="font-size: 20px;">
+    <li class="list-group-item" style="font-weight: bold;"> Username: <span style="font-weight: normal;">{{user?.username}}</span></li>
+    <li class="list-group-item" style="font-weight: bold;"> Email: <span style="font-weight: normal;"> {{user?.email}}</span></li>
+    <li class="list-group-item" style="font-weight: bold;"> With us since: <span style="font-weight: normal;" > {{user?.registerDate}}</span> </li>
+    <li class="list-group-item" style="font-weight: bold;"> BIO: <span style="font-weight: normal;">{{user?.bio}} </span></li>
   </ul>
 </div>

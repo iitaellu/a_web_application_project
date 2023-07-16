@@ -21,7 +21,7 @@
       </div>
       <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
-          <button type="reset" class="btn btn-default">Cancel</button>
+          <button type="reset" class="btn btn-default" (click)="openform = !openform">Cancel</button>
           <button type="submit" class="btn btn-primary" value="Send">Submit</button>
         </div>
       </div>
@@ -43,8 +43,8 @@
       
       <div id="{{search._id}}">
           <div class="d-flex w-100 justify-content-between"  >
-          <h5 class="mb-1">{{search.topic}}</h5>
-          <small>{{search.owner}}</small>
+          <h5 class="mb-1" style="font-weight: bold;">{{search.topic}}</h5>
+          <small routerLink="/profile/{{search.owner}}" style="font-weight: bold;">{{search.owner}}</small>
           <small>{{search.date}}</small>
           </div>
           <p class="mb-1">{{search.content}}</p>
@@ -60,8 +60,8 @@
     <li *ngFor="let post of posts" routerLink="/read-post/{{post._id}}" class="list-group-item list-group-item-action flex-column align-items-start">
         <div id="{{post._id}}">
             <div class="d-flex w-100 justify-content-between"  >
-            <h5 class="mb-1">{{post.topic}}</h5>
-            <small>{{post.owner}}</small>
+            <h5 class="mb-1" style="font-weight: bold;">{{post.topic}}</h5>
+            <small routerLink="/profile/{{post.owner}}" style="font-weight: bold;">{{post.owner}}</small>
             <small>{{post.date}}</small>
             </div>
             <p class="mb-1">{{post.content}}</p>
@@ -77,7 +77,7 @@
     <form class="form-horizontal jumbotron bg-dark text-white" (submit)="sendPost()">
     <fieldset>
       <legend>New post</legend>
-      <div class="form-group">
+      <div class="form-group" >
         <label class="col-lg-2 control-label">Topic</label>
         <div class="col-lg-10">
         <input type="text" class="form-control" placeholder=" Enter Topic" [(ngModel)]="topic" name="topic">
