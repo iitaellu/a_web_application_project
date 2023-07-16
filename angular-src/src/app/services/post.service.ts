@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 
+//Service for posts and commenting thingss
+
 @Injectable()
 export class PostService {
 
@@ -35,11 +37,13 @@ export class PostService {
     this.authToken = token;
   }
 
+  //Get wanted post's data from backend
   getPostData(postid){
     return this.http.get('http://localhost:3000/users/getPostData/'+postid, {})
     .map(function (res) { return res.json(); });
   }
 
+  //send new comment data to backend
   sendComment(comment){
       let headers = new Headers();
       this.loadToken();
@@ -49,26 +53,31 @@ export class PostService {
               .map(function (res) { return res.json(); });
   }
 
+  //like or dislike current post
   likePost(msg){
     return this.http.post('http://localhost:3000/users/likePost', msg)
     .map(function (res) { return res.json(); });
   }
 
+  //like or dislike current comment
   likeComment(msg){
     return this.http.post('http://localhost:3000/users/likeComment', msg)
     .map(function (res) { return res.json(); });
   }
 
+  //get wanted userdata from backend
   getUserData(username){
     return this.http.get('http://localhost:3000/users/profile/'+username, {})
     .map(function (res) { return res.json(); });
   }
 
+  //Send  search data to backend
   searchPost(topic){
     return this.http.post('http://localhost:3000/users/search', topic)
     .map(function (res) { return res.json(); });
   }
 
+  //Send bio data to backend
   saveBio(bio){
     return this.http.post('http://localhost:3000/users/saveBio', bio)
     .map(function (res) { return res.json(); });

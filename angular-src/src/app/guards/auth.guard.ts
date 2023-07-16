@@ -6,6 +6,7 @@ import { AuthService } from "../services/auth.service";
 export class AuthGuard implements CanActivate{
     constructor(private authService:AuthService, private router: Router){}
 
+    //Check if user is logged in, if no, will direct user to login page
     canActivate(){
         if(this.authService.loggedIn()){
             return true;

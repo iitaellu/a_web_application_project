@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  //Sends bio editing data to postservice after finding user data wit authService
   saveBio(bio){
     this.authService.getProfile().subscribe(user_data => {
       this.user = user_data.user

@@ -28,15 +28,16 @@ export class ReadPostComponent implements OnInit {
       this.postid = res['id'];
     });
     this.getPostData(this.postid);
-   // this.getComments(this.postid);
   }
 
+  //Get's current post's data from postService
   getPostData(postid){
     this.postService.getPostData(postid).subscribe(result => {
       this.data = result['data'];
     });
   }
 
+  //sends new comment's data to postservice after finding current user with authService
   sendComment(){
     this.authService.getProfile().subscribe(user_data => {
       this.user = user_data.user
@@ -64,6 +65,8 @@ export class ReadPostComponent implements OnInit {
 
   }
 
+  //press like button in current post. Finds right user with authservice
+  //and sends data to postService 
   likePost(id){
 
     this.authService.getProfile().subscribe(user_data => {
@@ -80,6 +83,8 @@ export class ReadPostComponent implements OnInit {
     })
   }
 
+  //bress like button in current comment. Finds right user with authservice
+  //and sends data to postService 
   likeComment(commentData){
     this.authService.getProfile().subscribe(user_data => {
       this.user = user_data.user

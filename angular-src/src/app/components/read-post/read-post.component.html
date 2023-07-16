@@ -1,7 +1,6 @@
-
+<!--prints post data-->
 <div class="p-3 border-bottom">
   <div class=" d-flex p-2 justify-content-between bg-dark text-white"  >
-  
   <h3 class="mb-1">{{data?.topic}}</h3>
   <h5 routerLink="/profile/{{data?.owner}}">{{data?.owner}}</h5>
   <small>{{data?.date}}</small> 
@@ -11,7 +10,8 @@
   <br>
   <small>Likes {{data?.votes}}</small>
 </div>
-<!--*ngFor="let commet of comments"-->
+
+<!--lists all post's comments-->
 <div class="list-group p-3 ">
   <li style="background-color:gray" *ngFor="let comment of data?.comments" class="list-group-item list-group-item-action flex-column align-items-start text-white">
       <div >
@@ -29,10 +29,12 @@
   </li>
 </div>
 
+<!--button to open comment form-->
 <div class="text-center marging-auto" style="margin: 10px;">
   <button *ngIf="authService.loggedIn()" class="btn btn-primary" (click)="opencommentform = !opencommentform">Comment</button>
 </div>
 
+<!--form to write new comment-->
 <div [hidden]="!opencommentform">
   <form class="form-horizontal jumbotron bg-dark text-white" (submit)="sendComment()">
   <fieldset>

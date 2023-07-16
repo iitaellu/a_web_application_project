@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+//Service tp chec validation of data
 @Injectable()
 export class ValidateService {
 

@@ -23,6 +23,7 @@ export class UserProfileComponent implements OnInit {
     this.getUserdata();
   }
 
+  //Get data from choosed user from postService
   getUserdata() {
     this.postService.getUserData(this.username).subscribe(result => {
       this.user = result['data'];

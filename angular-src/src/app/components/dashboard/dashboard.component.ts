@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     this.getPost();
   }
 
+  //Fetch all posts from database
   getPost(){
     this.postService.getPost().subscribe(result => {
       this.posts = result['posts'];
@@ -60,6 +61,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  //Sends search's keyword to postService
   searchPost(stopic){
     console.log(stopic)
     if(stopic == undefined){

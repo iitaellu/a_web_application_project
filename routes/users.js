@@ -18,7 +18,7 @@ router.post("/register", (req, res, next)=>{
         password: req.body.password,
         registerDate: date,
         bio: "",
-        bioEditDate: ""
+        bioEditDate: "Never"
     });
     console.log(newUser)
 
@@ -111,6 +111,7 @@ router.post('/sendNewPost', function(req, res, next) {
     });
 })
 
+//Send Comment to post
 router.post('/sendComment', (req, res) => {
     Post.findById(req.body.postid, (err, post) => {
         if(err) throw err;
@@ -125,13 +126,13 @@ router.post('/sendComment', (req, res) => {
                 if(err) throw err;
                 return res.json({success: true})
               })
-            //console.log(comments)
         }
     })
-   //return res.json({msg: "error with sending comment"})
 })
 
+// Like current post
 router.post('/likePost', (req,res) => {
+    //Find right post
     Post.findById(req.body.postid, (err, post) => {
         if(err) throw err;
         else{
@@ -139,6 +140,7 @@ router.post('/likePost', (req,res) => {
             let liked = post.liked;
             let likedwithout= [];
 
+            //checking if user is already liked post
             for (let i = 0; i < liked.length; i++){
                 if (liked[i] == req.body.user._id){
                     exisist = 1;
@@ -149,16 +151,18 @@ router.post('/likePost', (req,res) => {
             }
 
             let likes, msg;
+            // if not liked, user will be added to liked list and number will rise
             if (exisist == 0){
                 likedwithout.push(req.body.user._id)
                 likes = post.votes + 1;
                 msg = "Liked"
             }
-
+            //if already liked user will be deleted from liked list and likes down grades 
             if (exisist == 1){
                 likes = post.votes -1;
                 msg = "Unliked"
             }
+            //Save changes
             Post.findByIdAndUpdate(req.body.postid, {$set:{liked: likedwithout, votes: likes}}, (err, doc) => {
                     if(err) throw err;
                     return res.json({success: true, msg: msg})
@@ -218,6 +222,7 @@ router.post('/likeComment', (req,res) => {
     })
 })
 
+//Go to wanted users profile (by username)
 router.get('/profile/:username', (req, res) => {
     console.log(req.params.username)
     User.findOne({username: req.params.username}, (err, user) => {
@@ -230,6 +235,7 @@ router.get('/profile/:username', (req, res) => {
 
 })
 
+//Search topics with keyword
 router.post('/search', (req, res) => {
     console.log(req.body)
     Post.find({topic: {'$regex': (req.body.topic)}}, (err, post) => {
@@ -240,6 +246,7 @@ router.post('/search', (req, res) => {
     })
 })
 
+//Save edited BIO tu user data
 router.post('/saveBio', (req, res) => {
     console.log(req.body)
     let date = moment().format('DD/MM/YYYY HH:mm')

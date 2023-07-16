@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  //chechs if all validation tasks are filled with validateservice and sends data to authservice
   onRegisterSubmit(){
     const user = {
       name: this.name,

@@ -9,9 +9,11 @@
 
 <br>
 <br>
+<!--Button to open bio edit form-->
 <div class="text-center marging-auto" style="margin: 10px;">
   <button *ngIf="authService.loggedIn()" class="btn btn-primary" (click)="openBIOform = !openBIOform">Write BIO</button>
 </div>
+<!--Bio'd editing form-->
 <div [hidden]="!openBIOform" class=" p-2" style="font-size: 20px;">
    <form class="form-horizontal jumbotron bg-dark text-white"  (submit)="saveBio(bio)">
     
@@ -29,5 +31,4 @@
       </div>
     </div>
   </form>
- 
 </div>

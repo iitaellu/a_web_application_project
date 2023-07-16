@@ -33,15 +33,17 @@ let UserSchema = new Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
+//Finds User by id
 module.exports.getUserById = function(id, callback){
     User.findById(id, callback);
 }
-
+//finds user by username
 module.exports.getUserByUsername = function(username, callback) {
     const query = {username: username}
     User.findOne(query, callback);
 }
 
+//add new user to database
 module.exports.addUser = function(newUser, callback){
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -52,6 +54,7 @@ module.exports.addUser = function(newUser, callback){
     });
 }
 
+//compares given password to right one
 module.exports.comparePassword = function(candididatePassword, hash, callBack) {
     bcrypt.compare(candididatePassword, hash, (err, isMatch) => {
         if(err) throw err;
