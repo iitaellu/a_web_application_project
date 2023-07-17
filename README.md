@@ -23,6 +23,8 @@ All users can see all posts and comments. All users can also see how many likes 
 
 TUTORIAL VIDEO: https://lut-my.sharepoint.com/:v:/g/personal/ida_kirveskoski_student_lut_fi/EYt9Mbc83apMmAxTqByBsMgBh2MtuSC3hic3L-TNVUr1dg?e=0hFOkf
 
+Documentation: https://lut-my.sharepoint.com/:w:/g/personal/ida_kirveskoski_student_lut_fi/EYLAD9slogpKmQIgEgZaPgMBpVy8lftJrTj_KBqXdiNvRA?e=8hT3fc
+
 ## Important source
 
 Base of project follows the Traversy Medias Mean Stack Front TO Back - video series
