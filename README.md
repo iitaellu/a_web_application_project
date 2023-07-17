@@ -21,7 +21,7 @@ This was practice work for "Adwanced web application course". Task was to create
 
 All users can see all posts and comments. All users can also see how many likes or comments each post has. To create posts, comments or like others content you need to login or register in. After logging in you can also see your own profile where you can write your own bio. All users can also Search posts. You can write key words and the application looks for posts with that word in their topic. 
 
-TUTORIAL VIDEO:
+TUTORIAL VIDEO: https://lut-my.sharepoint.com/:v:/g/personal/ida_kirveskoski_student_lut_fi/EYt9Mbc83apMmAxTqByBsMgBh2MtuSC3hic3L-TNVUr1dg?e=0hFOkf
 
 ## Important source
 
